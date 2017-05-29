@@ -1,0 +1,20 @@
+{
+  "name": "node-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node build/server.js",
+    "dev": "NODE_ENV=development PORT=8000 REDIS_STORE_URI=redis://localhost:6379 REDIS_STORE_SECRET=secret TZ='America/Chicago' nodemon build/server.js",
+    "test": "PORT=8001 REDIS_STORE_URI=redis://localhost:6379 REDIS_STORE_SECRET=secret TZ='America/Chicago' NODE_ENV=test mocha build/test -t 10000",
+    "build": "babel -d build src",
+    "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'",
+    "webpack": "NODE_ENV=development webpack --progress --watch"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015-node6": "^0.4.0",
+    "babel-preset-latest": "^6.22.0"
+  }
+}
