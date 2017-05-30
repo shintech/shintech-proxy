@@ -32,7 +32,8 @@ https.on('request', function (req, res) {
 
   req.on('end', function () {
     if (req.method === 'POST') {
-      body = JSON.parse(body)
+      body = tryJSON(body).value
+
       request.post(url).form(body).pipe(res)
     }
     if (req.method === 'GET') {
@@ -48,5 +49,13 @@ https.on('request', function (req, res) {
 https.on('error', function (err) {
   logger.error(err)
 })
+
+function tryJSON (str) {
+  try {
+    return { value: JSON.parse(str), valid: true }
+  } catch (err) {
+    return { value: str, valid: false }
+  }
+}
 
 https.listen(443)
