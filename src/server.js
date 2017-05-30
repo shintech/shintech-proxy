@@ -1,7 +1,8 @@
 import path from 'path'
 import fs from 'fs'
 import os from 'os'
-import http from 'http'
+import request from 'request'
+import logger from 'winston-color'
 
 const domainName = 'dev.shintech.ninja'
 
@@ -13,25 +14,39 @@ var serverConfig = {
   cert: fs.readFileSync(sslPath + '/fullchain.pem')
 }
 
-const https = require('https').Server(serverConfig, onRequest)
+const https = require('https').Server(serverConfig)
 
-function onRequest (clientReq, clientRes) {
-  var options = {
-    hostname: 'localhost',
-    port: 8000,
-    path: clientReq.url,
-    method: 'GET'
-  }
+https.on('listening', function () {
+  logger.info('listening on port 443...')
+})
 
-  var proxy = http.request(options, function (res) { // eslint-disable-line
-    res.pipe(clientRes, {
-      end: true
-    })
+https.on('request', function (req, res) {
+  const url = 'http://' + req.headers.host + ':8000' + req.url
+
+  logger.info(req.method, url, res.statusCode)
+
+  var body = ''
+
+  req.on('data', function (chunk) {
+    body += chunk
   })
 
-  clientReq.pipe(proxy, {
-    end: true
+  req.on('end', function () {
+    if (req.method === 'POST') {
+      request.post(url).form(body).pipe(res)
+    }
+    if (req.method === 'GET') {
+      request.get(url).pipe(res)
+    }
   })
-}
+
+  req.on('error', function (err) {
+    logger.error(err)
+  })
+})
+
+https.on('error', function (err) {
+  logger.error(err)
+})
 
 https.listen(443)

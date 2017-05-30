@@ -1,20 +1,24 @@
 {
-  "name": "node-proxy",
-  "version": "0.0.2",
-  "main": "index.js",
+  "name": "shintech-proxy",
+  "version": "0.0.3",
+  "main": "build/server.js",
+  "repository": "https://github.com:/shintech/shintech-proxy",  
   "license": "MIT",
   "scripts": {
     "start": "node build/server.js",
-    "dev": "NODE_ENV=development PORT=8000 REDIS_STORE_URI=redis://localhost:6379 REDIS_STORE_SECRET=secret TZ='America/Chicago' nodemon build/server.js",
-    "test": "PORT=8001 REDIS_STORE_URI=redis://localhost:6379 REDIS_STORE_SECRET=secret TZ='America/Chicago' NODE_ENV=test mocha build/test -t 10000",
+    "dev": "NODE_ENV=development DOMAIN_NAME=dev.shintech.ninja TZ='America/Chicago' nodemon build/server.js",
+    "test": "TZ='America/Chicago' DOMAIN_NAME=dev.shintech.ninja NODE_ENV=test mocha build/test -t 10000",
     "build": "babel -d build src",
-    "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'",
-    "webpack": "NODE_ENV=development webpack --progress --watch"
+    "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015-node6": "^0.4.0",
     "babel-preset-latest": "^6.22.0"
+  },
+  "dependencies": {
+    "request": "^2.81.0",
+    "winston-color": "^1.0.0"
   }
 }
