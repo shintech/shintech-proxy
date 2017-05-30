@@ -26,13 +26,13 @@ https.on('request', function (req, res) {
   logger.info(req.method, url, res.statusCode)
 
   var body = ''
-
   req.on('data', function (chunk) {
     body += chunk
   })
 
   req.on('end', function () {
     if (req.method === 'POST') {
+      body = JSON.parse(body)
       request.post(url).form(body).pipe(res)
     }
     if (req.method === 'GET') {
