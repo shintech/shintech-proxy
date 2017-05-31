@@ -1,0 +1,13 @@
+apps:
+  - script: ./build/server.js
+    name: 'shintech-proxy'
+    watch: true
+    env:
+      NODE_ENV: development
+      TZ: America/Chicago
+      DOMAIN_NAME: dev.shintech.ninja
+    env_production:
+      NODE_ENV: production
+      TZ: America/Chicago
+      DOMAIN_NAME: shintech.ninja
+      
