@@ -4,7 +4,7 @@ import os from 'os'
 import request from 'request'
 import logger from 'winston-color'
 
-const domainName = 'dev.shintech.ninja'
+const domainName = process.env.DOMAIN_NAME
 
 const homedir = os.homedir()
 const sslPath = path.join(homedir, 'letsencrypt', 'live', domainName)
