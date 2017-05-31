@@ -1,6 +1,6 @@
 {
   "name": "shintech-proxy",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "build/server.js",
   "repository": "https://github.com:/shintech/shintech-proxy",
   "license": "MIT",

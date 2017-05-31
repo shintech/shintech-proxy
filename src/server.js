@@ -37,7 +37,7 @@ app.use(proxy)
 var server = https.createServer(serverConfig, app).listen(port)
 
 server.on('listening', function (req, res) {
-  logger.info(chalk.bgBlack.cyan(packageName), 'v.' + chalk.bgBlack.green(packageVersion), 'listening on port', chalk.bgBlack.yellow(port))
+  logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} listening on port ${chalk.bgBlack.yellow(port)}`)
 })
 
 server.on('request', function (req, res) {
