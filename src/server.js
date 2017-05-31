@@ -19,9 +19,12 @@ const https = require('https').Server(serverConfig)
 https.on('listening', function () {
   logger.info('listening on port 443...')
 })
+const servers = ['dev.shintech.ninja:8000', 'dev.shintech.ninja:8001', 'dev.shintech.ninja:8002']
 
+var count = 0
+var url
 https.on('request', function (req, res) {
-  const url = 'http://' + req.headers.host + ':8000' + req.url
+  url = 'http://' + servers[count] + req.url
 
   logger.info(req.method, url, res.statusCode)
 
@@ -40,6 +43,12 @@ https.on('request', function (req, res) {
     if (req.method === 'GET') {
       request.get(url).pipe(res)
     }
+      count += 1
+
+  if (count >= servers.length) {
+    count = 0
+  }   
+
   })
 
   req.on('error', function (err) {
