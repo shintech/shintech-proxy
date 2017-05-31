@@ -18,7 +18,7 @@ const sslPath = path.join(homedir, 'letsencrypt', 'live', domainName)
 var options = {
   target: {
     host: 'localhost',
-    port: 8000
+    port: process.env.TARGET
   },
   logProvider: logProvider
 }

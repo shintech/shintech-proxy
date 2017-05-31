@@ -6,10 +6,11 @@ apps:
       NODE_ENV: development
       TZ: America/Chicago
       DOMAIN_NAME: dev.shintech.ninja
-      PORT: 443
+      PORT: 8443
+      TARGET: 8000
     env_production:
       NODE_ENV: production
       TZ: America/Chicago
       DOMAIN_NAME: shintech.ninja
       PORT: 443
-      
+      TARGET: 8080
