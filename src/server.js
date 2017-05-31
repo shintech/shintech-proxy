@@ -26,6 +26,7 @@ https.on('request', function (req, res) {
   logger.info(req.method, url, res.statusCode)
 
   var body = ''
+
   req.on('data', function (chunk) {
     body += chunk
   })
