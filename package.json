@@ -1,12 +1,12 @@
 {
   "name": "shintech-proxy",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "main": "build/server.js",
   "repository": "https://github.com:/shintech/shintech-proxy",
   "license": "MIT",
   "scripts": {
     "start": "node build/server.js",
-    "dev": "TARGET=8000 PORT=8443 NODE_ENV=development DOMAIN_NAME=dev.shintech.ninja TZ='America/Chicago' nodemon build/server.js",
+    "dev": "TARGET=8000 PORT=8443 NODE_ENV=development DOMAIN_NAME=shintech.ninja TZ='America/Chicago' nodemon build/server.js",
     "test": "TZ='America/Chicago' DOMAIN_NAME=dev.shintech.ninja NODE_ENV=test mocha build/test -t 10000",
     "build": "babel -d build src",
     "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'"
