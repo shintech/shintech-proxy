@@ -41,7 +41,7 @@ server.on('listening', function (req, res) {
 })
 
 server.on('request', function (req, res) {
-  logger.info(chalk.cyan(req.method), 'http://' + req.headers.host + req.url, res.statusCode)
+  logger.info(chalk.cyan(req.method), 'http://' + req.headers.host + req.url)
 })
 
 server.on('error', function (err) {
